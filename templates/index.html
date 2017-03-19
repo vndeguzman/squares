@@ -1,22 +1,47 @@
 <!DOCTYPE html>
-<html ng-app="thinkster">
+<html ng-app="squares">
 <head>
-  <title>thinkster-django-angular-boilerplate</title>
-
+  <title>Squares</title>
   <base href="/" />
-
-  {% include 'stylesheets.html' %}
 </head>
 
 <body>
-  {% include 'navbar.html' %}
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#not-google-plus-nav">
+          <span class="sr-only">Toggle Navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Not Google Plus</a>
+      </div> <!-- ./navbar-header -->
 
+      <div class="collapse navbar-collapse" id="not-google-plus-nav">
+        <ul class="nav navbar-nav pull-right">
+          {% if user.is_authenticated %}
+          <li><a href="/+{{ user.username }}">+{{ user.username }}</a></li>
+          <li><a href="/+{{ user.username }}/settings">Settings</a></li>
+          <li><a href="javascript:void(0)">Logout</a></li>
+          {% else %}
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+          {% endif %}
+        </ul>
+      </div> <!-- /.collapse.navbar-collapse -->
+    </div> <!-- /.container-fluid -->
+  </nav>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-xs-12 ng-view"></div>
+      <div class="col-xs-12 ng-view">
+      </div>
     </div>
   </div>
 
-  {% include 'javascripts.html' %}
+  <grid></grid>
+
+  <script src="static/bundles/vendor.bundle.js"></script>
+  <script src="static/bundles/app.bundle.js"></script>
 </body>
 </html>
