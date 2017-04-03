@@ -1,5 +1,5 @@
 angular
-    .module('squares.grid', [])
+    .module('squares.play.grid', ['as.sortable'])
 
 require('./grid.controller')
 require('./grid.service')

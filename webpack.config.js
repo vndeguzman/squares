@@ -1,6 +1,7 @@
 let path = require("path")
 let webpack = require('webpack')
 let BundleTracker = require('webpack-bundle-tracker')
+let ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
     context: path.resolve(),
@@ -16,6 +17,8 @@ module.exports = {
             'angular-route',
             'angular-sanitize',
             'angular-touch',
+            'ng-sortable',
+            'angular-vidbg',
             'lodash',
             'moment'
         ],
@@ -54,13 +57,14 @@ module.exports = {
                 ],
             },
             {
-                test: /\.useable\.css$/,
-                use: [
-                    {
-                        loader: 'style-loader/useable'
-                    },
-                    { loader: 'css-loader' },
-                ],
+                test: /\.scss$/,
+                use: [{
+                    loader: "style-loader" // creates style nodes from JS strings
+                }, {
+                    loader: "css-loader" // translates CSS into CommonJS
+                }, {
+                    loader: "sass-loader" // compiles Sass to CSS
+                }]
             },
             {
                 test: /\.html$/,

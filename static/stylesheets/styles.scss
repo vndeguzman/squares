@@ -1,0 +1,56 @@
+@import '~angular-material/angular-material.scss';
+@import '~angular-vidbg/dist/vidBg.css';
+
+body, html {
+    height: 100%;
+}
+
+main {
+    min-height: calc(100vh - 176px);
+}
+
+.p-t {
+    padding-top: 20px;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.sub-wrapper video {
+    position: absolute;
+    z-index: 0;
+}
+
+.sub-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+.transparent {
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.heart-beat {
+    animation: heart-beat 800ms 3 0s;
+}
+
+.big-fab {
+    width: 100px !important;
+    height: 100px !important;;
+    border-radius: 50px !important;
+}
+
+@keyframes heart-beat {
+    0% {
+        -webkit-transform: scale(0.9);
+        transform: scale(0.9);
+    }
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}

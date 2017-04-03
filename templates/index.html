@@ -5,42 +5,55 @@
   <base href="/" />
 </head>
 
-<body>
-  <nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#not-google-plus-nav">
-          <span class="sr-only">Toggle Navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">Not Google Plus</a>
-      </div> <!-- ./navbar-header -->
-
-      <div class="collapse navbar-collapse" id="not-google-plus-nav">
-        <ul class="nav navbar-nav pull-right">
-          {% if user.is_authenticated %}
-          <li><a href="/+{{ user.username }}">+{{ user.username }}</a></li>
-          <li><a href="/+{{ user.username }}/settings">Settings</a></li>
-          <li><a href="javascript:void(0)">Logout</a></li>
-          {% else %}
-          <li><a href="/login">Login</a></li>
-          <li><a href="/register">Register</a></li>
-          {% endif %}
-        </ul>
-      </div> <!-- /.collapse.navbar-collapse -->
-    </div> <!-- /.container-fluid -->
-  </nav>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-12 ng-view">
+<body ng-cloak class="wrapper" ng-controller="MainController as main">
+  <div class="sub-wrapper" flex>
+    <video autoplay id="vid" video-current-time="0">
+      <source src="static/images/ink-drops.mp4" type="video/mp4">
+    </video>
+    <header class="md-padding ">
+      <md-toolbar md-scroll-shrink class="transparent">
+        <div layout="row" layout-align="start center" flex flex-offset="20"
+        >&#9635; Squares</div>
+      </md-toolbar>
+    </header>
+    <main flex>
+      <div layout="row" ui-view>
+        <div flex="20">&nbsp;</div>
+        <div flex="80" layout="row" layout-align="center center" layout-margin>
+          <md-content flex class="transparent" ng-cloak>
+            <md-tabs md-dynamic-height md-selected="main.indexSelectedTab">
+              <md-tab label="Sign Up" ng-click="main.activeTab = 'signup'" >
+                <md-content class="md-padding transparent" ng-cloak layout-margin>
+                  <sign-up></sign-up>
+                </md-content>
+              </md-tab>
+              <md-tab label="Login" ng-click="main.activeTab = 'login'">
+                <md-content class="md-padding transparent" layout-margin>
+                  <login></login>
+                </md-content>
+              </md-tab>
+              <md-tab label="Play" ng-click="main.activeTab = 'play'">
+                <md-content class="md-padding transparent" layout-margin>
+                  <game ng-if="main.activeTab === 'play'"></game>
+                </md-content>
+              </md-tab>
+              <md-tab label="Top Scores" ng-click="main.activeTab = 'topscores'">
+                <md-content class="md-padding transparent">
+                  <top-scores></top-scores>
+                </md-content>
+              </md-tab>
+            </md-tabs>
+          </md-content>
+        </div>
+        <div flex="20">&nbsp;</div>
       </div>
-    </div>
+    </main>
+    <footer>
+      <md-button class="md-fab heart-beat md-fab-bottom-right big-fab" aria-label="Eat cake" ng-click="main.forward()">
+        <span>Ok &rsaquo;</span>
+      </md-button>
+    </footer>
   </div>
-
-  <grid></grid>
-
   <script src="static/bundles/vendor.bundle.js"></script>
   <script src="static/bundles/app.bundle.js"></script>
 </body>

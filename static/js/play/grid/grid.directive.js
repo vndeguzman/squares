@@ -1,5 +1,5 @@
 angular
-    .module('squares.grid')
+    .module('squares.play.grid')
         .directive('grid', grid)
 
 function grid ($compile) {
